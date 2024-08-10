@@ -7,6 +7,13 @@ function addExpense(e) {
     const description = document.getElementById('description').value;
     const amount = parseFloat(document.getElementById('amount').value);
     const category = document.getElementById('category').value;
+    
+    // Ensure amount is a valid number
+    if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount');
+        return;
+    }
+
     const date = moment().format('YYYY-MM-DD HH:mm:ss');
 
     const expense = {
@@ -40,7 +47,7 @@ function renderExpenses() {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${expense.description}</td>
-            <td>$${expense.amount.toFixed(2)}</td>
+            <td>₹${expense.amount.toFixed(2)}</td>
             <td>${expense.category}</td>
             <td>${moment(expense.date).format('MMM D, YYYY')}</td>
             <td>
@@ -79,7 +86,7 @@ function updateChart() {
     };
 
     if (chart) {
-        chart.destroy();
+        chart.destroy(); // Destroy the previous chart instance
     }
 
     chart = new Chart(ctx, {
