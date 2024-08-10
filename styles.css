@@ -1,7 +1,7 @@
 :root {
     --primary-color: #3498db;
     --secondary-color: #2ecc71;
-    --background-color: #ecf0f1;
+    /* --background-color: #ecf0f1; */
     --card-background: #ffffff;
     --text-color: #34495e;
 }
@@ -15,8 +15,13 @@
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    background-color: #0f172a; /* Equivalent to bg-slate-950 */
-    background: radial-gradient(circle 500px at 50% 200px, #3e3e3e, transparent);
+
+    background-color: #0a0a0a; 
+    background-image: radial-gradient(
+        ellipse 80% 80% at 50% -20%, 
+        rgba(120, 119, 198, 0.3), 
+        rgba(255, 255, 255, 0)
+    );
 }
 
 .container {
@@ -145,4 +150,30 @@ th {
         font-weight: bold;
         text-align: left;
     }
+}
+
+/* copyright section  */
+#copyright {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    height: 100px; 
+    background-color: black; 
+    padding: 10px; 
+    border-top: 1px solid #ddd; 
+}
+
+#copyright p {
+    margin: 0; 
+    color: white;
+}
+
+#copyright a {
+    color: purple;
+    text-decoration: none; 
+}
+
+#copyright a:hover {
+    text-decoration: underline;
 }
