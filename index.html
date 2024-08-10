@@ -10,11 +10,7 @@
 </head>
 <body>
     <div class="container">
-<<<<<<< HEAD
         <h1 style="color: white;">Expense Tracker</h1>
-=======
-        <h1 style="color: white;">trackMyExpense</h1>
->>>>>>> parent of f6fe2b9 (income test)
         
         <div class="card add-expense">
             <h2>Add Expense</h2>
@@ -36,13 +32,16 @@
 
         <div class="card expense-summary">
             <h2>Expense Summary</h2>
+            <label for="total-income">Total Income: ₹</label>
+            <input type="number" id="total-income" placeholder="Enter your total income">
+            <p>Total Expenses: <span id="total-expenses">₹0.00</span></p>
+            <p>Amount Left: <span id="amount-left">₹0.00</span></p>
             <canvas id="expense-chart"></canvas>
         </div>
         
         <div class="card expense-list">
             <h2>Expense List</h2>
             <input type="month" id="month-filter" class="month-filter">
-<<<<<<< HEAD
             <select id="category-filter">
                 <option value="">All Categories</option>
                 <option value="Food">Food</option>
@@ -51,8 +50,6 @@
                 <option value="Entertainment">Entertainment</option>
                 <option value="Other">Other</option>
             </select>
-=======
->>>>>>> parent of f6fe2b9 (income test)
             
             <table id="expense-table">
                 <thead>
@@ -74,11 +71,6 @@
         
     </div>
 
-    <footer>
-        <div id="copyright">
-            <p>Made with ❤︎ by <a href="https://zaid.impic.tech">Zaid</a><a href="https://www.impic.tech"> @Impic! </a></p>
-        </div>        
-    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
