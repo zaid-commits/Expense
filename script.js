@@ -130,4 +130,3 @@ document.getElementById('month-filter').addEventListener('change', renderExpense
 
 renderExpenses();
 updateChart();
-updateSummary();
