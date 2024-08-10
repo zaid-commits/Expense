@@ -107,13 +107,11 @@ th {
         overflow-x: auto;
     }
 
-    /* Make the table more readable on small screens by stacking */
     table, thead, tbody, th, td, tr {
         display: block;
     }
 
     th {
-        /* Hide header cells on small screens */
         position: absolute;
         top: -9999px;
         left: -9999px;
@@ -128,7 +126,6 @@ th {
     }
 
     td {
-        /* Show each cell in a block format */
         display: flex;
         justify-content: space-between;
         padding-left: 50%;
@@ -137,7 +134,6 @@ th {
     }
 
     td::before {
-        /* Display the corresponding header for each cell */
         content: attr(data-label);
         position: absolute;
         left: 0;
@@ -147,3 +143,4 @@ th {
         text-align: left;
     }
 }
+
