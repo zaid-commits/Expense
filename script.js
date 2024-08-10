@@ -28,6 +28,7 @@ function addExpense(e) {
     updateLocalStorage();
     renderExpenses();
     updateChart();
+    updateSummary();
 
     document.getElementById('expense-form').reset();
 }
@@ -58,7 +59,6 @@ function renderExpenses() {
         expenseList.appendChild(tr);
     });
 }
-
 
 function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(expenses));
@@ -104,6 +104,15 @@ function updateChart() {
     });
 }
 
+function updateSummary() {
+    const totalIncome = parseFloat(document.getElementById('total-income').value) || 0;
+    const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+    const amountLeft = totalIncome - totalExpenses;
+
+    document.getElementById('total-expenses').textContent = `₹${totalExpenses.toFixed(2)}`;
+    document.getElementById('amount-left').textContent = `₹${amountLeft.toFixed(2)}`;
+}
+
 function editExpense(id) {
     const expense = expenses.find(e => e.id === id);
     if (expense) {
@@ -115,6 +124,7 @@ function editExpense(id) {
         updateLocalStorage();
         renderExpenses();
         updateChart();
+        updateSummary();
     }
 }
 
@@ -123,10 +133,13 @@ function deleteExpense(id) {
     updateLocalStorage();
     renderExpenses();
     updateChart();
+    updateSummary();
 }
 
 document.getElementById('expense-form').addEventListener('submit', addExpense);
 document.getElementById('month-filter').addEventListener('change', renderExpenses);
+document.getElementById('total-income').addEventListener('change', updateSummary);
 
 renderExpenses();
 updateChart();
+updateSummary();
