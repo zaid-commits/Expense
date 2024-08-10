@@ -46,11 +46,11 @@ function renderExpenses() {
     }).forEach(expense => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${expense.description}</td>
-            <td>₹${expense.amount.toFixed(2)}</td>
-            <td>${expense.category}</td>
-            <td>${moment(expense.date).format('MMM D, YYYY')}</td>
-            <td>
+            <td data-label="Description">${expense.description}</td>
+            <td data-label="Amount">₹${expense.amount.toFixed(2)}</td>
+            <td data-label="Category">${expense.category}</td>
+            <td data-label="Date">${moment(expense.date).format('MMM D, YYYY')}</td>
+            <td data-label="Actions">
                 <i class="fas fa-edit action-btn" onclick="editExpense(${expense.id})"></i>
                 <i class="fas fa-trash action-btn" onclick="deleteExpense(${expense.id})"></i>
             </td>
@@ -58,6 +58,7 @@ function renderExpenses() {
         expenseList.appendChild(tr);
     });
 }
+
 
 function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(expenses));
