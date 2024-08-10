@@ -143,3 +143,34 @@ document.getElementById('total-income').addEventListener('change', updateSummary
 renderExpenses();
 updateChart();
 updateSummary();
+
+
+// pagination
+<div id="pagination">
+    <button id="prev-page">Previous</button>
+    <button id="next-page">Next</button>
+</div>
+
+//filter
+document.getElementById('category-filter').addEventListener('change', function () {
+    const selectedCategory = this.value;
+    const rows = document.querySelectorAll('#expense-list tr');
+
+    rows.forEach(row => {
+        const category = row.querySelector('td[data-label="Category"]').textContent;
+        row.style.display = selectedCategory === '' || category === selectedCategory ? '' : 'none';
+    });
+});
+
+
+//download expenses dtat
+function exportToCSV() {
+    const rows = Array.from(document.querySelectorAll('#expense-table tbody tr'));
+    const csvContent = 'data:text/csv;charset=utf-8,'
+        + rows.map(row => Array.from(row.querySelectorAll('td')).map(cell => cell.textContent).join(',')).join('\n');
+
+    const link = document.createElement('a');
+    link.setAttribute('href', encodeURI(csvContent));
+    link.setAttribute('download', 'expenses.csv');
+    link.click();
+}
