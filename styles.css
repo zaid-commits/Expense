@@ -14,10 +14,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    /* background-color: var(--background-color);
-    color: var(--text-color); */
     line-height: 1.6;
-     background-color: #0f172a; /* Equivalent to bg-slate-950 */
+    background-color: #0f172a; /* Equivalent to bg-slate-950 */
     background: radial-gradient(circle 500px at 50% 200px, #3e3e3e, transparent);
 }
 
@@ -75,12 +73,15 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    overflow-x: auto;
+    display: block;
 }
 
 th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 th {
@@ -98,24 +99,50 @@ th {
     margin-bottom: 20px;
 }
 
-@media (min-width: 768px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .expense-list {
-        grid-column: 1 / -1;
-    }
-}
-
 @media (max-width: 767px) {
     table {
-        font-size: 14px;
+        display: block;
+        width: 100%;
+        overflow-x: auto;
     }
 
-    th, td {
-        padding: 8px;
+    /* Make the table more readable on small screens by stacking */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th {
+        /* Hide header cells on small screens */
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin-bottom: 10px;
+        border-bottom: 2px solid var(--primary-color);
+        display: block;
+        padding: 10px 5px;
+        background-color: var(--card-background);
+    }
+
+    td {
+        /* Show each cell in a block format */
+        display: flex;
+        justify-content: space-between;
+        padding-left: 50%;
+        position: relative;
+        text-align: right;
+    }
+
+    td::before {
+        /* Display the corresponding header for each cell */
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
     }
 }
