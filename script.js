@@ -28,7 +28,6 @@ function addExpense(e) {
     updateLocalStorage();
     renderExpenses();
     updateChart();
-    updateSummary();
 
     document.getElementById('expense-form').reset();
 }
@@ -59,6 +58,7 @@ function renderExpenses() {
         expenseList.appendChild(tr);
     });
 }
+
 
 function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(expenses));
@@ -104,15 +104,6 @@ function updateChart() {
     });
 }
 
-function updateSummary() {
-    const totalIncome = parseFloat(document.getElementById('total-income').value) || 0;
-    const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-    const amountLeft = totalIncome - totalExpenses;
-
-    document.getElementById('total-expenses').textContent = `₹${totalExpenses.toFixed(2)}`;
-    document.getElementById('amount-left').textContent = `₹${amountLeft.toFixed(2)}`;
-}
-
 function editExpense(id) {
     const expense = expenses.find(e => e.id === id);
     if (expense) {
@@ -124,7 +115,6 @@ function editExpense(id) {
         updateLocalStorage();
         renderExpenses();
         updateChart();
-        updateSummary();
     }
 }
 
@@ -133,44 +123,11 @@ function deleteExpense(id) {
     updateLocalStorage();
     renderExpenses();
     updateChart();
-    updateSummary();
 }
 
 document.getElementById('expense-form').addEventListener('submit', addExpense);
 document.getElementById('month-filter').addEventListener('change', renderExpenses);
-document.getElementById('total-income').addEventListener('change', updateSummary);
 
 renderExpenses();
 updateChart();
 updateSummary();
-
-
-// pagination
-<div id="pagination">
-    <button id="prev-page">Previous</button>
-    <button id="next-page">Next</button>
-</div>
-
-//filter
-document.getElementById('category-filter').addEventListener('change', function () {
-    const selectedCategory = this.value;
-    const rows = document.querySelectorAll('#expense-list tr');
-
-    rows.forEach(row => {
-        const category = row.querySelector('td[data-label="Category"]').textContent;
-        row.style.display = selectedCategory === '' || category === selectedCategory ? '' : 'none';
-    });
-});
-
-
-//download expenses dtat
-function exportToCSV() {
-    const rows = Array.from(document.querySelectorAll('#expense-table tbody tr'));
-    const csvContent = 'data:text/csv;charset=utf-8,'
-        + rows.map(row => Array.from(row.querySelectorAll('td')).map(cell => cell.textContent).join(',')).join('\n');
-
-    const link = document.createElement('a');
-    link.setAttribute('href', encodeURI(csvContent));
-    link.setAttribute('download', 'expenses.csv');
-    link.click();
-}
